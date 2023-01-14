@@ -252,14 +252,15 @@ SpriteMorph.prototype.reportAxisScale = function (axis) {
 
 SpriteMorph.prototype.createCardClone = function () {
     const cmd = 'createCardClone';
-    const args = this.name;
+    const args = new List([this.name]);
     const options = [cmd, args];
     this.sendToWorld('doCommand', options);
 };
 
 SpriteMorph.prototype.removeCardClone = function () {
     const cmd = 'removeCardClone';
-    const options = [cmd];
+    const args = new List([]);
+    const options = [cmd, args];
     this.removeClone();
     this.sendToWorld('doCommand', options);
 };
@@ -299,7 +300,8 @@ SpriteMorph.prototype.sendToWorld = function (message, options) {
     const card = this.card;
     if (card) {
         const ide = this.parentThatIsA(IDE_Morph);
-        const payload = options instanceof Array ? new List([card.id, ...options]) : new List([card.id]);
+        const messageId = Math.floor(Math.random() * 1000000000);
+        const payload = new List([card.id, messageId, 'wait', ...options])
         ide.broadcast(message, null, payload);
     } else {
         throw new Error('card does not exist');
