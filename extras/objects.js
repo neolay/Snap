@@ -383,7 +383,7 @@ SpriteMorph.prototype.blockTemplates = function (
     });
 
     if (category === 'motion') {
-
+        /*
         blocks.push(block('move'));
         blocks.push(block('turnTo'));
         blocks.push(block('rollTo'));
@@ -395,13 +395,15 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push(block('reportAxisTranslation'));
         blocks.push(block('reportRotation'));
         blocks.push(block('reportAxisRotation'));
+        */
 
     } else if (category === 'looks') {
-
+        /*
         blocks.push(block('scaleTo'));
         blocks.push(block('setScale'));
         blocks.push(block('reportScale'));
         blocks.push(block('reportAxisScale'));
+        */
 
     } else if (category === 'control') {
 
