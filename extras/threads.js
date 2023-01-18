@@ -131,7 +131,16 @@ Process.prototype.publishAndWait = function (scope, event, data) {
             if (!thisObj._accumulatorWait) {
                 thisObj._accumulatorWait = {};
             }
-            cardPawn.listen('blocks:doneMessage', thisObj._handleDoneMessage.bind(thisObj));
+            if (!thisObj._doneMessageListeners){
+                // class scope
+                thisObj._doneMessageListeners = [];
+            }
+            if (!thisObj._doneMessageListeners.includes(cardPawn.actor.id)){
+                // this.cardPawn.listen('blocks:doneMessage', this._handleDoneMessage.bind(this));
+                cardPawn.listen('blocks:doneMessage', thisObj._handleDoneMessage.bind(thisObj));
+                thisObj._doneMessageListeners.push(cardPawn.actor.id);
+            }
+            
             const messageId = this.publish(scope, event, data);
             thisObj._accumulatorWait[messageId] = this;
         } else if (this.context.accumulator.done) {
