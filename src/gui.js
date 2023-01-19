@@ -866,8 +866,11 @@ IDE_Morph.prototype.applyPaneHidingConfigurations = function () {
         this.stage.hide();
         this.corralBar.hide();
         this.corral.hide();
-        this.spriteBar.hide();
         this.stageHandle.hide();
+    }
+
+    if (cnf.hideSpriteBar) {
+        this.spriteBar.hide();
     }
 
     // no palette
@@ -2586,7 +2589,7 @@ IDE_Morph.prototype.fixLayout = function (situation) {
         if (this.spriteEditor.isVisible) {
             this.spriteEditor.setLeft(this.spriteBar.left());
             this.spriteEditor.setTop(
-                cnf.noSprites ?
+                cnf.hideSpriteBar ?
                     (cnf.hideControls ? this.top() + border
                         : this.controlBar.bottom() + padding)
                     : this.spriteBar.bottom() + padding
